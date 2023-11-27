@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7u0382CsvtprRoHcMe8wJlAJlbZox3zO3nxyKi6qF3YrpK3p8yUp7qKtDrodwaJ2cFp1cSFUd8G1WaJYf4iivQ==",
+  "dgSpecHash": "5lDMPDk2PGedAjnH3sschG7KM474n4tHinX0eZkKYEUYwQc70JbJepE6AWyBJ3f1ogjL1I5U5bzI8ALPBnEQLA==",
   "success": true,
-  "projectFilePath": "D:\\Uni\\Code\\Parallele\\PaeralleleLabor\\BackEnd\\BackEnd.csproj",
+  "projectFilePath": "D:\\Code\\PaeralleleLabor\\BackEnd\\BackEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\andre\\.nuget\\packages\\dapper\\2.1.24\\dapper.2.1.24.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

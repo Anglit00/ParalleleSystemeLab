@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Uni\\Code\\Parallele\\PaeralleleLabor\\BackEnd\\BackEnd.csproj": {}
+    "D:\\Code\\PaeralleleLabor\\BackEnd\\BackEnd.csproj": {}
   },
   "projects": {
-    "D:\\Uni\\Code\\Parallele\\PaeralleleLabor\\BackEnd\\BackEnd.csproj": {
+    "D:\\Code\\PaeralleleLabor\\BackEnd\\BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Uni\\Code\\Parallele\\PaeralleleLabor\\BackEnd\\BackEnd.csproj",
+        "projectUniqueName": "D:\\Code\\PaeralleleLabor\\BackEnd\\BackEnd.csproj",
         "projectName": "BackEnd",
-        "projectPath": "D:\\Uni\\Code\\Parallele\\PaeralleleLabor\\BackEnd\\BackEnd.csproj",
+        "projectPath": "D:\\Code\\PaeralleleLabor\\BackEnd\\BackEnd.csproj",
         "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-        "outputPath": "D:\\Uni\\Code\\Parallele\\PaeralleleLabor\\BackEnd\\obj\\",
+        "outputPath": "D:\\Code\\PaeralleleLabor\\BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

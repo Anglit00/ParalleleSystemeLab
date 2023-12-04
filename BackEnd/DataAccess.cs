@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Data.SqlClient;
+﻿using Npgsql;
 using Dapper;
 
 namespace Backend
@@ -8,7 +7,7 @@ namespace Backend
     {
         public List<T> LoadData<T, U>(string sqlStatement, U parameters, string connectionString)
         {
-            using (IDbConnection conn = new SqlConnection(connectionString))
+            using (NpgsqlConnection conn = new(connectionString))
             {
                 List<T> rows = conn.Query<T>(sqlStatement, parameters).ToList();
                 return rows;
@@ -17,7 +16,7 @@ namespace Backend
 
         public void SaveData<T>(string sqlStatement, T parameters, string connectionString)
         {
-            using (IDbConnection conn = new SqlConnection(connectionString))
+            using (NpgsqlConnection conn = new(connectionString))
             {
                 conn.Execute(sqlStatement, parameters);
             }

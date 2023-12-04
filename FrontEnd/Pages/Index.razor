@@ -1,0 +1,31 @@
+﻿@page "/"
+@using System.Reflection.Metadata.Ecma335
+@using FrontEnd.Classes
+@using FrontEnd.Models
+
+<PageTitle>Index</PageTitle>
+
+@foreach (FoodModel m in list)
+{
+    <div>
+        @m.Name
+    </div>
+}
+
+@code
+{
+    List<FoodModel> list = new();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        GetFoodData();
+    }
+
+    private async void GetFoodData()
+    {
+        ApiHandle handler = new();
+        list= await handler.GetAllFood();
+        StateHasChanged();
+    }
+}
+

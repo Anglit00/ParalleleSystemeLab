@@ -1,4 +1,7 @@
+using Backend;
 using BackEnd.Controllers;
+
+using Microsoft.Extensions.DependencyInjection;
 
 internal class Program
 {
@@ -7,13 +10,17 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
         builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddSingleton(new DBController(GetConnectionString()));
+        // Register services.
+        builder.Services.AddTransient<Crud>(provider =>
+        {
+            return new Crud(GetConnectionString());
+        });
+
+        builder.Services.AddTransient<DBController>();
 
         var app = builder.Build();
 
@@ -25,7 +32,6 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
-
         app.UseAuthorization();
 
         app.MapControllers();

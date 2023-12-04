@@ -1,4 +1,5 @@
-﻿using Backend; // Add this using statement to import your Crud class
+﻿using Backend;
+using Backend.Models; // Add this using statement to import your Crud class
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEnd.Controllers
@@ -9,9 +10,9 @@ namespace BackEnd.Controllers
     {
         private readonly Crud _crud;
 
-        public DBController(string connectionString)
+        public DBController(Crud crud)
         {
-            _crud = new Crud(connectionString);
+            _crud = crud;
         }
 
         [HttpGet]

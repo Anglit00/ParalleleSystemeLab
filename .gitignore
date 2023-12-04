@@ -1,3 +1,9 @@
 ﻿.vs/PaeralleleLabor/FileContentIndex/
 
 /PaeralleleLabor.sln
+
+# Ignore the "vs" folder
+.vs/
+
+# Ignore all "debug" folders
+**/debug/

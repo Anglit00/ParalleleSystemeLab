@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 using FrontEnd.Models;
 
 namespace FrontEnd.Classes
@@ -6,24 +7,108 @@ namespace FrontEnd.Classes
     public class ApiHandle
     {
         public const string Url = "https://localhost:7150";
+
         public async Task<List<FoodModel>> GetAllFood()
         {
             try
             {
-                using (HttpClient client = new())
+                using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) })
                 {
-                    client.Timeout = new(0,0,10);
-                    var response= await client.GetAsync(Url+"/api/DB");
-                    string json = await response.Content.ReadAsStringAsync();
-                    FoodModel[] foodModel = Newtonsoft.Json.JsonConvert.DeserializeObject<FoodModel[]>(json);
-                    if (foodModel == null) return new();
-                    return foodModel.ToList();
+                    var response = await client.GetAsync($"{Url}/api/DB");
+                    response.EnsureSuccessStatusCode();
+
+                    var json = await response.Content.ReadAsStringAsync();
+                    var foodModel = Newtonsoft.Json.JsonConvert.DeserializeObject<FoodModel[]>(json);
+
+                    return foodModel?.ToList() ?? new List<FoodModel>();
                 }
             }
             catch (Exception e)
             {
-                return new();
+                return new List<FoodModel>();
+            }
+        }
+
+        public async Task<FoodModel> GetFoodById(int id)
+        {
+            try
+            {
+                using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) })
+                {
+                    var response = await client.GetAsync($"{Url}/api/DB/{id}");
+                    response.EnsureSuccessStatusCode();
+
+                    var json = await response.Content.ReadAsStringAsync();
+                    var foodModel = Newtonsoft.Json.JsonConvert.DeserializeObject<FoodModel>(json);
+
+                    return foodModel;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> CreateFood(FoodModel model)
+        {
+            try
+            {
+                using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) })
+                {
+                    var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync($"{Url}/api/DB", content);
+                    response.EnsureSuccessStatusCode();
+
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateFood(int id, FoodModel model)
+        {
+            try
+            {
+                using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) })
+                {
+                    var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync($"{Url}/api/DB/{id}", content);
+                    response.EnsureSuccessStatusCode();
+
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteFood(int id)
+        {
+            try
+            {
+                using (var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) })
+                {
+                    var response = await client.DeleteAsync($"{Url}/api/DB/{id}");
+                    response.EnsureSuccessStatusCode();
+
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
     }
+
 }

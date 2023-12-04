@@ -5,16 +5,49 @@
 
 <PageTitle>Index</PageTitle>
 
-@foreach (FoodModel m in list)
-{
-    <div>
-        @m.Name
-    </div>
-}
+<div style="max-height: 300px; overflow-y: auto;">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Danger Level</th>
+                <th>More Info</th>
+                <th></th>
+                <th>
+                    <button @onclick="CreateItem">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (FoodModel m in list)
+            {
+                <tr>
+                    <td>@m.Name</td>
+                    <td class="danger-level-@m.DangerLevel">@m.DangerLevel</td>
+                    <td>@m.MoreInfo</td>
+                    <td>
+                        <button @onclick="() => EditItem(m.Id)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button @onclick="() => DeleteItem(m.Id)">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @code
 {
     List<FoodModel> list = new();
+    ApiHandle handler = new();
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -23,9 +56,22 @@
 
     private async void GetFoodData()
     {
-        ApiHandle handler = new();
-        list= await handler.GetAllFood();
+        list = await handler.GetAllFood();
         StateHasChanged();
     }
-}
 
+    void EditItem(int itemId)
+    {
+        Console.WriteLine($"Edit item with ID: {itemId}");
+    }
+
+    async void DeleteItem(int itemId)
+    {
+        if(await handler.DeleteFood(itemId)) GetFoodData();
+        Console.WriteLine($"Delete item with ID: {itemId}");
+    }
+
+    void CreateItem()
+    {
+    }
+}

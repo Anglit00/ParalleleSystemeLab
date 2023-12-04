@@ -1,8 +1,6 @@
 using Backend;
 using BackEnd.Controllers;
 
-using Microsoft.Extensions.DependencyInjection;
-
 internal class Program
 {
     private static void Main(string[] args)

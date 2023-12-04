@@ -1,0 +1,54 @@
+﻿<!-- Update.razor -->
+@page "/update/{Id:int}"
+@inject NavigationManager NavigationManager
+@using FrontEnd.Classes
+@using FrontEnd.Models
+
+<PageTitle>Update Food Item</PageTitle>
+
+<div class="form">
+    <h3>Update Food Item</h3>
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" @bind="existingItem.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="dangerLevel">Danger Level:</label>
+        <input id="dangerLevel" @bind="existingItem.DangerLevel" type="number" min="1" max="5" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="moreInfo">More Info:</label>
+        <textarea id="moreInfo" @bind="existingItem.MoreInfo" class="form-control"></textarea>
+    </div>
+
+    <button @onclick="UpdateItem" class="btn btn-primary">Save</button>
+</div>
+
+@code
+{
+    FoodModel existingItem = new();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    ApiHandle handler = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        existingItem = await handler.GetFoodById(Id);
+        if (existingItem == null)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    async void UpdateItem()
+    {
+        if (existingItem.MoreInfo == null) existingItem.MoreInfo = "";
+        await handler.UpdateFood(Id, existingItem);
+        NavigationManager.NavigateTo("/");
+    }
+}

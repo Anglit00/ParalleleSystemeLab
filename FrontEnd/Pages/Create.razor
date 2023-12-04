@@ -1,0 +1,56 @@
+﻿@page "/create/{Id:int}"
+@inject NavigationManager NavigationManager
+@using FrontEnd.Classes
+@using FrontEnd.Models
+
+<PageTitle>Create Food Item</PageTitle>
+
+<div class="form">
+    <h3>Create a new Food Item</h3>
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" @bind="newItem.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="dangerLevel">Danger Level:</label>
+        <input id="dangerLevel" @bind="newItem.DangerLevel" type="number" min="1" max="5" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="moreInfo">More Info:</label>
+        <textarea id="moreInfo" @bind="newItem.MoreInfo" class="form-control"></textarea>
+    </div>
+
+    <button @onclick="SaveItem" class="btn btn-primary">Save</button>
+    <button @onclick="Cancel" class="btn btn-primary">Cancel</button>
+</div>
+
+@code
+{
+    FoodModel newItem = new();
+
+    [Parameter]
+    public int Id { get; set; }
+
+    ApiHandle handler = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        newItem.Id = Id;
+        newItem.DangerLevel = 1;
+    }
+
+    async void SaveItem()
+    {
+        if (newItem.MoreInfo == null) newItem.MoreInfo = "";
+        await handler.CreateFood(newItem);
+        NavigationManager.NavigateTo("/");
+    }
+    async void Cancel()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

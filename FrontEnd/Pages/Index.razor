@@ -1,11 +1,12 @@
 ﻿@page "/"
 @using System.Reflection.Metadata.Ecma335
+@inject NavigationManager NavigationManager
 @using FrontEnd.Classes
 @using FrontEnd.Models
 
 <PageTitle>Index</PageTitle>
-
-<div style="max-height: 300px; overflow-y: auto;">
+<h1>What you can Eat</h1>
+<div style="max-height: 600px; overflow-y: auto;">
     <table border="1">
         <thead>
             <tr>
@@ -63,6 +64,7 @@
     void EditItem(int itemId)
     {
         Console.WriteLine($"Edit item with ID: {itemId}");
+        NavigationManager.NavigateTo($"/update/{itemId}");
     }
 
     async void DeleteItem(int itemId)
@@ -73,5 +75,8 @@
 
     void CreateItem()
     {
+        int newId = list.Count > 0 ? list.Max(item => item.Id) + 1 : 1;
+
+        NavigationManager.NavigateTo($"/create/{newId}");
     }
 }

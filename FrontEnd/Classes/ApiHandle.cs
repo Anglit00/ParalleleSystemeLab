@@ -6,7 +6,7 @@ namespace FrontEnd.Classes
 {
     public class ApiHandle
     {
-        public const string Url = "https://localhost:7150";
+        public const string Url = "http://backend_container:80";
 
         public async Task<List<FoodModel>> GetAllFood()
         {

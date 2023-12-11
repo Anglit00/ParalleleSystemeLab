@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db_container:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: food
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    networks:
+      - network
+
+  backend_container:
+    build:
+      context: .
+      dockerfile: ./DockerFile-backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - "5000:80"
+    depends_on:
+      - db_container
+    networks:
+      - network
+
+  frontend_container:
+    build:
+      context: .
+      dockerfile: ./DockerFile-frontend
+    environment:
+      REACT_APP_BACKEND_URL: http://backend_container:80
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend_container
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge

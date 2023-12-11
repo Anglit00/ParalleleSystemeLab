@@ -1,0 +1,7 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - init: |
+      sudo apt-get update
+      sudo apt-get install -y dotnet-sdk-6.0=6.0.25-1
+  - command: docker-compose up --build

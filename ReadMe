@@ -1,0 +1,58 @@
+# Parallele Systeme Lab
+
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+## Description
+
+This repository contains the source code for the Parallel Systems Laboratory project. The project is designed to demonstrate and explore concepts related to parallel computing and distributed systems.
+
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+## Getting Started
+
+These instructions will help you set up and run the project on your local machine.
+
+### Prerequisites
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Anglit00/ParalleleSystemeLab.git
+Navigate to the project directory:
+
+bash
+Copy code
+cd ParalleleSystemeLab
+Build and run the project using Docker Compose:
+
+bash
+Copy code
+docker-compose up --build
+Usage
+Provide instructions on how to use and interact with your project. Include details about endpoints, configuration, or any other relevant information.
+
+Contributing
+If you would like to contribute to the project, please follow the guidelines outlined in CONTRIBUTING.md.
+
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Acknowledgments
+Mention any contributors, libraries, or tools you used or were inspired by.
+If applicable, provide links to external resources or references.
+
+
+Feel free to modify the content based on your project's specific details and add any sections you find relevant. Additionally, make sure to update the license badge, contributing guidelines, and acknowledgments based on your project's specifics.

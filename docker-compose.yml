@@ -14,8 +14,7 @@ services:
 
   backend_container:
     build:
-      context: .
-      dockerfile: ./DockerFile-backend
+      context: ./BackEnd
     environment:
       ASPNETCORE_ENVIRONMENT: Production
     ports:
@@ -27,8 +26,7 @@ services:
 
   frontend_container:
     build:
-      context: .
-      dockerfile: ./DockerFile-frontend
+      context: ./FrontEnd
     environment:
       REACT_APP_BACKEND_URL: http://backend_container:80
     ports:

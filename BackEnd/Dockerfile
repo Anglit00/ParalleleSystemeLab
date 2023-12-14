@@ -10,4 +10,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out ./
 EXPOSE 9988
-CMD ["dotnet", "backend.dll"]
+CMD ["dotnet", "BackEnd.dll"]

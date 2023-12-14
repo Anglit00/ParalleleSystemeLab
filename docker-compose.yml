@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  swaLab_network:
+    driver: bridge
+
 services:
   db_container:
     image: postgres:latest
@@ -10,7 +14,7 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - network
+      - swaLab_network
 
   backend_container:
     build:
@@ -22,7 +26,7 @@ services:
     depends_on:
       - db_container
     networks:
-      - network
+      - swaLab_network
 
   frontend_container:
     build:
@@ -34,8 +38,4 @@ services:
     depends_on:
       - backend_container
     networks:
-      - network
-
-networks:
-  network:
-    driver: bridge
+      - swaLab_network

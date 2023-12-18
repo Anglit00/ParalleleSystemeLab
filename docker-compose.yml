@@ -31,8 +31,6 @@ services:
   frontend_container:
     build:
       context: ./FrontEnd
-    environment:
-      REACT_APP_BACKEND_URL: http://backend_container:80
     ports:
       - "3000:80"
     depends_on:

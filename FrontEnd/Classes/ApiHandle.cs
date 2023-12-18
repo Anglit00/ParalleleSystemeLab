@@ -6,7 +6,14 @@ namespace FrontEnd.Classes
 {
     public class ApiHandle
     {
-        public const string Url = "http://backend_container:80";
+        private static IConfiguration _configuration; // Making the configuration static
+
+        public static void Initialize(IConfiguration configuration)
+        {
+            _configuration = configuration; // Set the static configuration
+        }
+
+        public static string Url => _configuration?.GetConnectionString("BackendApiUrl") ?? string.Empty;
 
         public async Task<List<FoodModel>> GetAllFood()
         {
